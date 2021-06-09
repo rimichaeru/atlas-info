@@ -1,64 +1,78 @@
 import {useState, useEffect} from "react"
-import './App.module.scss';
+import styles from './App.module.scss';
 import SearchBar from "./components/SearchBar";
 import BriefCard from "./components/BriefCard";
 
 function App() {
 
-  const [placeID, setPlaceID] = useState("nothing");
-  const [geoLink, setGeoLink] = useState("");
+  const [placeID, setPlaceID] = useState("");
+  const [placeView, setPlaceView] = useState("");
+  const [cardList, setCardList] = useState([])
   // const [fullInfo, setFullInfo] = useState("");
 
 
+
+
   const searchPlaceAPI = (searchText) => {
+
+    const formattedID = searchText.split(" ").map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(" ");
+
+    setPlaceView(formattedID);
+
     
-    fetch(`https://api.teleport.org/api/cities/?search=${searchText}`).then((response) => {
+    if (searchText.length < 4) {
+      return;
+    }
+
+
+    
+    fetch(`https://api.teleport.org/api/cities/?search=${searchText}&embed=city:search-results/city:item/city:urban_area/ua:scores/ua:item&embed=city:search-results/city:item/city:urban_area/ua:images`).then((response) => {
       return response.json();
     }).then((placeData) => {
-      // console.log(placeData["_embedded"]["city:search-results"]); // array of matching areas, could display all names in a dropdown!
-      // console.log(placeData["_embedded"]["city:search-results"][0]["_links"]["city:item"]["href"]); // link for geonameid, for next API call
-      // console.log(placeData["_embedded"]["city:search-results"][0]["matching_full_name"]); // full location name
 
-      // use the closest match [0] as an example
-      setGeoLink(placeData["_embedded"]["city:search-results"][0]["_links"]["city:item"]["href"]);
-      setPlaceID(placeData["_embedded"]["city:search-results"][0]["matching_full_name"]);
+      setCardList(placeData["_embedded"]["city:search-results"].map((place) => {
+        try {
+          const key = place["_embedded"]["city:item"]["geoname_id"] ? place["_embedded"]["city:item"]["geoname_id"] : "N/A";
+          const fullName = place["_embedded"]["city:item"]["full_name"] ? place["_embedded"]["city:item"]["full_name"] : "N/A";
+          const lat = place["_embedded"]["city:item"]["location"]["latlon"]["latitude"] ? place["_embedded"]["city:item"]["location"]["latlon"]["latitude"] : "N/A";
+          const lon = place["_embedded"]["city:item"]["location"]["latlon"]["longitude"] ? place["_embedded"]["city:item"]["location"]["latlon"]["longitude"] : "N/A";
+          const pop = place["_embedded"]["city:item"]["population"] ? place["_embedded"]["city:item"]["population"] : "N/A";
+          const continent = place["_embedded"]["city:item"]["_embedded"]["city:urban_area"]["continent"] ? place["_embedded"]["city:item"]["_embedded"]["city:urban_area"]["continent"] : "N/A";
+          const img = place["_embedded"]["city:item"]["_embedded"]["city:urban_area"]["_embedded"]["ua:images"]["photos"][0]["image"]["mobile"] ? place["_embedded"]["city:item"]["_embedded"]["city:urban_area"]["_embedded"]["ua:images"]["photos"][0]["image"]["mobile"] : "N/A";
+          const summary = place["_embedded"]["city:item"]["_embedded"]["city:urban_area"]["_embedded"]["ua:scores"]["summary"] ? place["_embedded"]["city:item"]["_embedded"]["city:urban_area"]["_embedded"]["ua:scores"]["summary"] : "N/A";
+          const score = place["_embedded"]["city:item"]["_embedded"]["city:urban_area"]["_embedded"]["ua:scores"]["teleport_city_score"] ? place["_embedded"]["city:item"]["_embedded"]["city:urban_area"]["_embedded"]["ua:scores"]["teleport_city_score"] : "N/A";
+          const categories = place["_embedded"]["city:item"]["_embedded"]["city:urban_area"]["_embedded"]["ua:scores"]["categories"] ? place["_embedded"]["city:item"]["_embedded"]["city:urban_area"]["_embedded"]["ua:scores"]["categories"] : "N/A";
+  
+          return <BriefCard key={key} fullName={fullName} lat={lat} lon={lon} pop={pop} continent={continent} img={img} summary={summary} score={score} categories={categories} />
 
+        } catch (error) {
+          
+        }
 
+      }))
 
-    }).catch(() => {
-      console.log("Invalid place! Please try again.");
-    });
+    })
 
-    // fetch(`https://api.teleport.org/api/cities/?search=${searchText}&embed=city:search-results/city:item/city:urban_area/ua:scores`).then((response) => {
-    //   return response.json();
-    // }).then((placeInfo) => {
-    //   console.log(placeInfo);
-    // })
   }
 
-  // 
 
   useEffect(() => {
-    searchPlaceAPI("San Francisco");
+    searchPlaceAPI("san francisco");
   }, [])
 
 
 
-  useEffect(() => {
-    fetch(geoLink).then((response) => {
-      return response.json();
-    }).then((placeData) => {
-      console.log(placeData);
-    }).catch(() => {
-      console.log("Invalid link! Please try again.");
-    })
-  }, [geoLink])
-
-
   return (
-    <div className="App">
-      <SearchBar />
-      <h3>You've searched for {placeID}</h3>
+    <div className={styles.app}>
+      <header>
+        <h3>You've searched for <span className={styles.place}>{placeView}</span></h3>
+        <SearchBar updateSearch={searchPlaceAPI}/>
+      </header>
+      <div className={styles.cardContainer}>
+        {cardList}
+      </div>
     </div>
   );
 }

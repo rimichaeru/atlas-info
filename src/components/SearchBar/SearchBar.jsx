@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./SearchBar.module.scss";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   return (
     <>
-      <p>SearchBar works</p>
+      <input type="text" placeholder="Search City, Region, or Country " onInput={(e) => props.updateSearch(e.target.value)}/>
     </>
   );
 };
