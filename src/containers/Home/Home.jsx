@@ -1,17 +1,14 @@
-import {useState, useEffect} from "react"
-import styles from './App.module.scss';
-import SearchBar from "./components/SearchBar";
-import BriefCard from "./components/BriefCard";
+import React, {useState, useEffect}  from "react";
+import styles from "../../App.module.scss";
+import SearchBar from "../../components/SearchBar";
+import BriefCard from "../../components/BriefCard";
 
-function App() {
+function Home() {
 
   const [placeID, setPlaceID] = useState("");
   const [placeView, setPlaceView] = useState("");
   const [cardList, setCardList] = useState([])
   // const [fullInfo, setFullInfo] = useState("");
-
-
-
 
   const searchPlaceAPI = (searchText) => {
 
@@ -26,8 +23,6 @@ function App() {
       return;
     }
 
-
-    
     fetch(`https://api.teleport.org/api/cities/?search=${searchText}&embed=city:search-results/city:item/city:urban_area/ua:scores/ua:item&embed=city:search-results/city:item/city:urban_area/ua:images`).then((response) => {
       return response.json();
     }).then((placeData) => {
@@ -47,6 +42,7 @@ function App() {
   
           return <BriefCard key={key} fullName={fullName} lat={lat} lon={lon} pop={pop} continent={continent} img={img} summary={summary} score={score} categories={categories} />
 
+
         } catch (error) {
           
         }
@@ -62,19 +58,27 @@ function App() {
     searchPlaceAPI("san francisco");
   }, [])
 
+  useEffect(() => {
+    if (cardList.length === 0) {
+      setCardList(
+        <h1>Maybe on a different planet!</h1>
+      )
+    }
+  }, [cardList])
 
 
   return (
     <div className={styles.app}>
+      <div className={styles.line}></div>
       <header>
         <h3>You've searched for <span className={styles.place}>{placeView}</span></h3>
         <SearchBar updateSearch={searchPlaceAPI}/>
       </header>
+      <div className={styles.line}></div>
       <div className={styles.cardContainer}>
         {cardList}
       </div>
     </div>
   );
 }
-
-export default App;
+export default Home;

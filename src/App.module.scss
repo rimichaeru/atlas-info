@@ -17,6 +17,12 @@
     }
   }
 
+  .line {
+    border: 1px solid rgba(109, 41, 141, 0.411);
+    box-shadow: 1px 1px 4px rgba(63, 63, 63, 0.493);
+    margin: 10px 20vw;
+  }
+
   .cardContainer {
     display: flex;
     flex-direction: row;

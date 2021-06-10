@@ -1,0 +1,27 @@
+
+nav {
+
+  
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+    li {
+      margin-top: 12px;
+      list-style-type: none;
+    }
+
+    .link {
+      color: rgba(132, 13, 187, 0.644);
+      text-decoration: none;
+
+      &:hover {
+        color: rgb(108, 10, 153);
+      }
+    }
+  }
+  
+}
+
+
