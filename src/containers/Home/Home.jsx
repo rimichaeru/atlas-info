@@ -19,7 +19,7 @@ function Home() {
     setPlaceView(formattedID);
 
     
-    if (searchText.length < 4) {
+    if (searchText.length < 2) {
       return;
     }
 
@@ -55,7 +55,19 @@ function Home() {
 
 
   useEffect(() => {
-    searchPlaceAPI("san francisco");
+    
+    const choice = Math.floor((Math.random(1) * 10));
+
+    if (choice < 3) {
+      searchPlaceAPI("Switzerland");
+    } else if (choice < 5) {
+      searchPlaceAPI("Brazil");
+    } else if (choice < 8) {
+      searchPlaceAPI("Germany");
+    } else {
+      searchPlaceAPI("Denmark");
+    }
+
   }, [])
 
   useEffect(() => {

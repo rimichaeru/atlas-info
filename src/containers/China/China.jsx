@@ -19,7 +19,7 @@ function China() {
     setPlaceView(formattedID);
 
     
-    if (searchText.length < 4) {
+    if (searchText.length < 2) {
       return;
     }
 
@@ -57,14 +57,22 @@ function China() {
     searchPlaceAPI("China");
   }, [])
 
-
+  useEffect(() => {
+    if (cardList.length === 0) {
+      setCardList(
+        <h1>Maybe on a different planet!</h1>
+      )
+    }
+  }, [cardList])
 
   return (
     <div className={styles.app}>
+      <div className={styles.line}></div>
       <header>
         <h3>You've searched for <span className={styles.place}>{placeView}</span></h3>
         <SearchBar updateSearch={searchPlaceAPI}/>
       </header>
+      <div className={styles.line}></div>
       <div className={styles.cardContainer}>
         {cardList}
       </div>
