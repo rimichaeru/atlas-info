@@ -76,6 +76,10 @@ function US() {
       <div className={styles.cardContainer}>
         {cardList}
       </div>
+      <div className={styles.footer}>
+        <p>Information provided by the <a href="https://developers.teleport.org/">Teleport API</a></p>
+        <p>Created By Lee-Michael D'Souza</p>
+      </div>
     </div>
   );
 }

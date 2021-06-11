@@ -40,14 +40,19 @@ const BriefCard = (props) => {
           <h3>{props.fullName}</h3>
           <p>{props.continent}</p>
         </div>
+
         <div className={styles.stats}>
           <p><b>Population</b> {formattedPop}</p>
           <p><b>City Score</b> {props.score.toFixed(1)}</p>
           <p><b>Latitude</b> {props.lat.toFixed(3)}</p>
           <p><b>Longitude</b> {props.lon.toFixed(3)}</p>
         </div>
+
         <p dangerouslySetInnerHTML={{__html: `${formattedSummary}`}}></p>
-        {categoryList()}
+
+        <div className={styles.categories}>
+          {categoryList()}
+        </div>
 
       </div>
 
