@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/atlas-info/static/css/main.4efc5097.chunk.css",
-    "main.js": "/atlas-info/static/js/main.98ca23d3.chunk.js",
-    "main.js.map": "/atlas-info/static/js/main.98ca23d3.chunk.js.map",
+    "main.css": "/atlas-info/static/css/main.170c1b4a.chunk.css",
+    "main.js": "/atlas-info/static/js/main.3fca5b93.chunk.js",
+    "main.js.map": "/atlas-info/static/js/main.3fca5b93.chunk.js.map",
     "runtime-main.js": "/atlas-info/static/js/runtime-main.25b38c71.js",
     "runtime-main.js.map": "/atlas-info/static/js/runtime-main.25b38c71.js.map",
     "static/js/2.a9f5c0ac.chunk.js": "/atlas-info/static/js/2.a9f5c0ac.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.b27cb3fd.chunk.js": "/atlas-info/static/js/3.b27cb3fd.chunk.js",
     "static/js/3.b27cb3fd.chunk.js.map": "/atlas-info/static/js/3.b27cb3fd.chunk.js.map",
     "index.html": "/atlas-info/index.html",
-    "static/css/main.4efc5097.chunk.css.map": "/atlas-info/static/css/main.4efc5097.chunk.css.map",
+    "static/css/main.170c1b4a.chunk.css.map": "/atlas-info/static/css/main.170c1b4a.chunk.css.map",
     "static/js/2.a9f5c0ac.chunk.js.LICENSE.txt": "/atlas-info/static/js/2.a9f5c0ac.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.25b38c71.js",
     "static/js/2.a9f5c0ac.chunk.js",
-    "static/css/main.4efc5097.chunk.css",
-    "static/js/main.98ca23d3.chunk.js"
+    "static/css/main.170c1b4a.chunk.css",
+    "static/js/main.3fca5b93.chunk.js"
   ]
 }
