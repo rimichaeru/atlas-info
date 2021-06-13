@@ -1,15 +1,16 @@
 import React from "react";
 import styles from "./BriefCard.module.scss";
+import BarChart from "../BarChart";
 
 const BriefCard = (props) => {
 
-  const categoryList = () => {
-    const catList = props.categories.map((category) => {
-      return <p style={{"color":category.color}} className={styles.catStyle}>{category.name}, {category.score_out_of_10.toFixed(2)}</p>
-    })
+  // const categoryList = () => {
+  //   const catList = props.categories.map((category) => {
+  //     return <p style={{"color":category.color}} className={styles.catStyle}>{category.name}, {category.score_out_of_10.toFixed(2)}</p>
+  //   })
 
-    return <div className={styles.catContainer}>{catList}</div>
-  }
+  //   return <div className={styles.catContainer}>{catList}</div>
+  // }
 
   // format population from number into string with commas for readability
   let formattedPop = "";
@@ -49,10 +50,16 @@ const BriefCard = (props) => {
         </div>
 
         <p dangerouslySetInnerHTML={{__html: `${formattedSummary}`}}></p>
-
-        <div className={styles.categories}>
-          {categoryList()}
+        
+        <div className={styles.categoriesHead}>
+          <h2>Categories <span>Higher is better!</span></h2>
         </div>
+        <BarChart data={props.categories.slice(0, 9)} title="Categories" />
+        <BarChart data={props.categories.slice(9)} title="Categories" />
+
+        {/* <div className={styles.categories}>
+          {categoryList()}
+        </div> */}
 
       </div>
 
