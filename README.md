@@ -1,5 +1,7 @@
 # atlas-info
 
+Use Atlas Info here! https://rimichaeru.github.io/atlas-info 
+
 Big thanks to Teleport for all of the useful information and for providing such a quality, accessible NoAuth API! https://developers.teleport.org/api/
 
 Atlas Info displays useful information about many cities and regions in the world.
