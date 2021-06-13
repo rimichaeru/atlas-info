@@ -11,11 +11,11 @@ import { Route, Switch } from "react-router-dom";
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/"><Home /></Route>
-      <Route path="/uk"><UK /></Route>
-      <Route path="/india"><India /></Route>
-      <Route path="/us"><US /></Route>
-      <Route path="/china"><China /></Route>
+      <Route exact path="/atlas-info"><Home /></Route>
+      <Route path="/atlas-info/uk"><UK /></Route>
+      <Route path="/atlas-info/india"><India /></Route>
+      <Route path="/atlas-info/us"><US /></Route>
+      <Route path="/atlas-info/china"><China /></Route>
       <Route path="/*"><Other /></Route>
     </Switch>
   );
