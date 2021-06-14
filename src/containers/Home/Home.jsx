@@ -94,7 +94,6 @@ function Home() {
       <div className={styles.footer}>
         <p>Information provided by the <a href="https://developers.teleport.org/">Teleport API</a></p>
         <p>Created By Lee-Michael D'Souza</p>
-        <input type="file" accept="image/*" capture="environment" />
       </div>
     </div>
   );
